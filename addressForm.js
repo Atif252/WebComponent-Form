@@ -69,10 +69,6 @@ template.innerHTML = `
         </form>
 
         <datalist id="street">
-            <option value="Firefox">
-            <option value="Chrome">
-            <option value="Opera">
-            <option value="Safari">
         </datalist>
     </div>
 `
@@ -92,7 +88,9 @@ class AddressForm extends HTMLElement {
             fetch(`https://api.zippopotam.us/de/${zipcode}`)
             .then(response => response.json())
             .then(data => {
+                const test = data.places[0]
                 this.shadowRoot.getElementById("city").value = data.places[0].state
+                this.shadowRoot.getElementById("street").value = test['place name']
             })
             .catch(error => console.error(error))
         }
@@ -105,7 +103,7 @@ class AddressForm extends HTMLElement {
         this.formValues.street = this.shadowRoot.getElementById("street").value;
         this.formValues.houseNo = this.shadowRoot.getElementById("houseNo").value;
         this.formValues.country = this.shadowRoot.getElementById("country").value;
-        console.log(this.formValues)
+        this.shadowRoot.querySelector('.json-data').innerHTML = this.formValues
     }
 
       connectedCallback() {
