@@ -89,7 +89,7 @@ class AddressForm extends HTMLElement {
 
     getCity(zipcode) {
         if(zipcode.length === 5){
-            fetch(`http://api.zippopotam.us/de/${zipcode}`)
+            fetch(`https://api.zippopotam.us/de/${zipcode}`)
             .then(response => response.json())
             .then(data => {
                 this.shadowRoot.getElementById("city").value = data.places[0].state
