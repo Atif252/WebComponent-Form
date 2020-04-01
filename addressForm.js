@@ -68,8 +68,7 @@ template.innerHTML = `
             <button id='submit-address'>Info</button>
         </form>
 
-        <datalist id="street">
-        </datalist>
+        <div class='json-data'></div>
     </div>
 `
 
@@ -103,7 +102,8 @@ class AddressForm extends HTMLElement {
         this.formValues.street = this.shadowRoot.getElementById("street").value;
         this.formValues.houseNo = this.shadowRoot.getElementById("houseNo").value;
         this.formValues.country = this.shadowRoot.getElementById("country").value;
-        this.shadowRoot.querySelector('.json-data').innerHTML = this.formValues
+        const data = JSON.stringify(this.formValues, null, 4)
+        this.shadowRoot.querySelector('.json-data').innerHTML = `<p>${data}</p>`
     }
 
       connectedCallback() {
